@@ -1538,4 +1538,185 @@ footer.site-footer .logo-text .company-name {
       background: #0b1320; color: #fff;
       padding: 14px 20px; border-radius: 8px; box-shadow: 0 12px 30px rgba(11,19,32,0.28);
       display: none; z-index:1200;
+
     }
+
+
+
+
+/* ===========================
+   Responsive, no-HTML-change Nav
+   Drop-in CSS — works with your existing HTML
+   File reference: /mnt/data/Project-Management-Services.html
+   =========================== */
+
+/* --------- Theme vars (edit these to change colors) --------- */
+:root{
+  --brand: #ff7a1a;         /* primary brand color */
+  --nav-text: #444444;      /* navigation text */
+  --nav-bg: #ffffff;        /* header background */
+  --muted: #6b6b6b;         /* secondary text */
+  --accent: rgba(255,122,26,0.08); /* hover bg */
+  --max-width: 1200px;
+}
+
+/* ---------- Header container (sticky + smooth) ---------- */
+.main-header{
+  width:100%;
+  background-color:var(--nav-bg);
+  box-shadow:0 2px 6px rgba(8,10,20,0.04);
+  padding:16px 40px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:999;
+  transition: padding 220ms ease, box-shadow 220ms ease, background-color 220ms ease;
+  -webkit-backdrop-filter: blur(0.4px);
+}
+
+/* Slightly reduced padding on very small screens */
+@media (max-width:420px){
+  .main-header{ padding:12px 16px; }
+}
+
+/* Logo area (no change to HTML required) */
+.logo-area{ display:flex; align-items:center; gap:12px; }
+.logo-box{
+  width:56px; height:44px; display:flex; align-items:center; justify-content:center;
+  border-radius:6px; border:2px solid var(--brand); font-weight:700; color:#222;
+}
+
+/* ---------- NAV: desktop behaviour ---------- */
+nav{ display:block; flex:1; margin-left:28px; margin-right:auto; }
+nav ul{
+  list-style:none;
+  display:flex;
+  gap:30px;
+  align-items:center;
+  margin:0;
+  padding:0;
+  font-size:15px;
+  /* make nav non-wrapping on narrow widths */
+  white-space:nowrap;
+}
+
+/* core link style */
+nav a{
+  color:var(--nav-text);
+  font-weight:500;
+  display:inline-block;
+  padding:8px 6px;
+  transition: color 180ms ease, transform 180ms ease;
+  text-decoration:none;
+  border-radius:6px;
+}
+
+/* hover / active */
+nav a:hover,
+nav a:focus,
+nav a.active{
+  color:var(--brand);
+  background:var(--accent);
+  transform:translateY(-1px);
+  outline:none;
+}
+
+/* underlined active look (thin animated line) */
+nav a::after{
+  content:"";
+  display:block;
+  height:2px;
+  width:0%;
+  background:var(--brand);
+  transition: width 220ms ease;
+  margin-top:6px;
+  border-radius:2px;
+}
+nav a:hover::after,
+nav a.active::after{ width:60%; }
+
+/* keyboard focus visible */
+nav a:focus{ box-shadow: 0 0 0 4px rgba(255,122,26,0.08); }
+
+/* ---------- Mobile fallback (no HTML change) ----------
+   On small screens we make the nav horizontally scrollable.
+   This keeps all links accessible without needing a hamburger toggle.
+   We add a faded edge to suggest more content.
+----------------------------------------------------------------- */
+@media (max-width:900px){
+  /* keep header compact */
+  .main-header{ padding:12px 18px; }
+
+  /* nav becomes horizontally scrollable */
+  nav{
+    margin-left:12px;
+    margin-right:12px;
+  }
+
+  nav ul{
+    gap:18px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none; /* firefox */
+    padding-bottom:6px;
+  }
+  /* hide scrollbar for Webkit */
+  nav ul::-webkit-scrollbar{ display:none; height:6px; }
+
+  /* show items inline and prevent wrapping */
+  nav ul{ white-space:nowrap; }
+
+  /* reduce size so items fit */
+  nav a{ font-size:15px; padding:10px 8px; display:inline-block; border-bottom:0; min-width: max-content; }
+
+  /* subtle fade at right edge to indicate more items exist */
+  nav{ position:relative; }
+  nav::after{
+    content:"";
+    position:absolute;
+    top:0; right:0;
+    width:56px; height:100%;
+    pointer-events:none;
+    background:linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.95) 60%);
+    /* adapt fade if header has background different than white */
+  }
+
+  /* when nav completely fits, hide the fade (best-effort, CSS-only) */
+  /* Note: can't detect scrollable content in pure CSS reliably across all browsers; the fade will remain but is subtle. */
+}
+
+/* ---------- Small tweak for very narrow phones ---------- */
+@media (max-width:380px){
+  nav ul{ gap:12px; }
+  .logo-box{ width:48px; height:38px; font-size:14px; }
+  nav a{ font-size:14px; padding:8px 8px; }
+}
+
+/* ---------- Footer of header helpers (if you had right-side CTAs) ---------- */
+.header-cta{
+  margin-left:auto;
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+/* example CTA style, safe to include even if markup not present */
+.header-cta .btn{
+  padding:8px 14px; border-radius:8px; font-weight:600; border:1px solid transparent;
+}
+.header-cta .btn.primary{ background:var(--brand); color:#fff }
+.header-cta .btn.ghost{ background:transparent; color:var(--nav-text); border-color:#eee }
+
+/* ---------- Accessibility: ensure tapping targets are big enough ---------- */
+nav a{ min-height:40px; line-height:40px; }
+
+/* ---------- Optional: reduced header shadow after user scrolls (CSS-only soft approach)
+   (If you later add JS you can toggle .shrink to make it more pronounced.)
+----------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference){
+  .main-header{ transition: padding 220ms ease, box-shadow 220ms ease; }
+}
+
+/* ---------- END of nav styles ---------- */
