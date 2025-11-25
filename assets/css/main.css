@@ -1,3 +1,4 @@
+
 {
       box-sizing: border-box;
     }
@@ -57,6 +58,16 @@ body {
 .top-bar-right a:hover {
   transform: translateY(-1px) scale(1.05);
   opacity: 0.85;
+}
+
+/* Fine-tuning social icon centering */
+.top-bar-right a i {
+  position: relative;   /* allows manual positioning */
+  left: 2px;            /* adjust horizontal alignment */
+  top: 0px;             /* adjust vertical alignment */
+}
+.top-bar-right a {
+  text-decoration: none !important;
 }
 
 /* ---------- MOBILE TOP BAR (CENTERED & STYLED) ---------- */
