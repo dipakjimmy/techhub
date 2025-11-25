@@ -536,6 +536,53 @@ body {
       color: #666;
     }
 
+/* ----------------------------
+   RESPONSIVE SERVICES CARDS
+   ---------------------------- */
+
+/* Tablet – 2 columns */
+@media (max-width: 992px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .service-card {
+    padding: 30px 20px;
+  }
+
+  .service-title {
+    font-size: 20px;
+  }
+}
+
+/* Mobile – 1 column (like FAQ cards) */
+@media (max-width: 600px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .service-card {
+    padding: 25px 18px;
+    text-align: left;          /* optional: looks more premium */
+    border-radius: 10px;       /* stylish like FAQ */
+  }
+
+  .service-icon {
+    margin: 0 0 15px 0;        /* align to left */
+  }
+
+  .service-title {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  .service-desc {
+    font-size: 13px;
+  }
+}
+
 
 /* WORK PLATFORMS – software logo carousel */
 .work-platforms {
@@ -1810,3 +1857,4 @@ footer.site-footer .logo-text .company-name {
 .menu-toggle.active span:nth-child(3) {
   transform: translateY(-11px) rotate(-45deg);
 }
+
