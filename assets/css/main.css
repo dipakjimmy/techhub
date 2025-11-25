@@ -166,6 +166,8 @@ body {
       color: #ff7a1a;
       text-transform: uppercase;
     }
+	
+	
 /* base card style */
 .service-card {
   border: 0.5px solid #ededed;
@@ -564,6 +566,35 @@ body {
       font-style: italic;
       color: #666;
     }
+/* DESKTOP (default) stays the same */
+.about-detail-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 1.2fr;
+  gap: 40px;
+  align-items: center;
+}
+
+/* MOBILE / TABLET: stack items in grid format */
+@media (max-width: 768px) {
+  .about-detail-inner {
+    grid-template-columns: 1fr;      /* one column */
+    grid-template-rows: auto auto;   /* two rows */
+    gap: 20px;                       /* smaller spacing */
+  }
+
+  /* Move image above text */
+  .about-image {
+    order: -1;                       /* image first */
+  }
+
+  /* Mobile-friendly image width */
+  .about-image img {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    display: block;
+  }
+}
 
     /* SERVICES SECTION */
     .services-section {
@@ -1066,10 +1097,10 @@ footer.site-footer .logo-text .company-name {
   }
 }
 
-/* Mobile – still 2 columns */
+/* Mobile – still 1 columns */
 @media (max-width: 600px) {
   .services-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 15px;
   }
 
