@@ -139,3 +139,13 @@ function normalizeHref(href) {
       // initialize nav behavior after injection
       initNavActive();
     });
+
+
+// Load softwares-carousal
+  fetch("components/softwares-carousal.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("softwares-carousal-include").innerHTML = html;
+      // initialize nav behavior after injection
+      initNavActive();
+    });
