@@ -1,4 +1,68 @@
+/* ---------- Desktop / Mobile header visibility (bulletproof) ---------- */
 
+/* Default: show desktop header, hide mobile header */
+#header-desktop-include > .header-desktop,
+.header-desktop {
+  display: block !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  height: auto !important;
+}
+
+#header-mobile-include > .header-mobile,
+.header-mobile {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Mobile: swap visibility (max-width can be adjusted) */
+@media (max-width: 768px) {
+  /* hide desktop header */
+  #header-desktop-include > .header-desktop,
+  .header-desktop {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* show mobile header */
+  #header-mobile-include > .header-mobile,
+  .header-mobile {
+    display: flex !important;         /* use flex to allow alignment */
+    align-items: center;
+    justify-content: space-between;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    height: auto !important;
+  }
+
+  /* ensure mobile nav uses its mobile styles */
+  .mobile-nav {
+    display: block !important;
+  }
+}
+
+/* Extra: if other scripts add inline styles, force aria-hidden for accessibility */
+#header-desktop-include[aria-hidden="true"],
+.header-desktop[aria-hidden="true"] {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+#header-mobile-include[aria-hidden="true"],
+.header-mobile[aria-hidden="true"] {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+
+/* General Styles */
+    *
 {
       box-sizing: border-box;
     }
@@ -167,7 +231,227 @@ body {
       text-transform: uppercase;
     }
 	
-	
+/*--------------------------------------------------------------
+# Hero Section
+--------------------------------------------------------------*/
+#hero {
+  width: 100%;
+  height: 70vh;
+  overflow: hidden;
+  padding: 0;
+  margin-bottom: -120px;
+  position: relative;
+  z-index: 1;
+}
+
+/* SLIDES */
+#hero .carousel-item {
+  width: 100%;
+  height: 70vh;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  /* Smooth transitions */
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 1s ease-in-out, transform 1.2s ease;
+}
+
+#hero .carousel-item.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* DARK OVERLAY (optional, currently empty) */
+#hero .carousel-item::before {
+  content: "";
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+}
+
+/* CONTAINER */
+#hero .carousel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
+  padding-bottom: 120px;
+}
+
+#hero .carousel-content {
+  text-align: center;
+}
+
+/* HEADLINE */
+#hero h2 {
+  color: #2e2e2e;
+  margin-bottom: 30px;
+  font-size: 48px;
+  font-weight: 700;
+  opacity: 0;                    /* animation initial state */
+  transform: translateY(-40px);  /* come from top */
+  transition: all 0.9s ease;
+}
+
+#hero h2 span {
+  color: #FF7722;
+}
+
+/* PARAGRAPH */
+#hero p {
+  width: 80%;
+  margin: 0 auto 30px auto;
+  color: #545454;
+  opacity: 0;                    /* animation initial */
+  transform: translateY(40px);   /* come from bottom */
+  transition: all 1s ease;
+}
+
+/* ACTIVATE TEXT ANIMATION WHEN SLIDE ACTIVE */
+#hero .active h2 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#hero .active p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* BUTTON */
+#hero .btn-get-started {
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 12px 32px;
+  border-radius: 50px;
+  transition: 0.5s;
+  margin: 10px;
+  border: 2px solid #FF7722;
+  background: #FF7722;
+  color: #fff;
+
+  opacity: 0;                            /* initial */
+  transform: translateY(20px);
+  transition: all 1s ease 0.4s;          /* delay */
+}
+
+#hero .active .btn-get-started {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#hero .btn-get-started:hover {
+  color: #FF7722;
+  background: #fff;
+  text-decoration: none;
+}
+
+/* SLIDE MOVEMENTS */
+#hero .carousel-inner .carousel-item,
+#hero .carousel-inner .active.carousel-item-start,
+#hero .carousel-inner .active.carousel-item-end {}
+
+#hero .carousel-inner .active,
+#hero .carousel-inner .carousel-item-next.carousel-item-start,
+#hero .carousel-inner .carousel-item-prev.carousel-item-end {
+  transition: 0.5s;
+}
+
+#hero .carousel-inner .carousel-item-next,
+#hero .carousel-inner .carousel-item-prev,
+#hero .carousel-inner .active.carousel-item-start,
+#hero .carousel-inner .active.carousel-item-end {
+  left: 0;
+  transform: translate3d(0, 0, 0);
+}
+
+/* PREV/NEXT CONTROLS */
+#hero .carousel-control-prev,
+#hero .carousel-control-next {
+  width: 10%;
+}
+
+#hero .carousel-control-next-icon,
+#hero .carousel-control-prev-icon {
+  background: none;
+  font-size: 48px;
+  color: #545454;
+  width: auto;
+  height: auto;
+  line-height: 1;
+}
+
+/* INDICATORS */
+#hero .carousel-indicators li {
+  cursor: pointer;
+  background: #FF7722;
+  border: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50px;
+  margin-bottom: 180px;
+}
+
+/* RESPONSIVE */
+@media (max-height: 768px), (max-width: 1200px) {
+  #hero {
+    margin-bottom: 60px;
+  }
+  #hero .carousel-container {
+    padding-bottom: 0;
+  }
+  #hero .carousel-indicators li {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  #hero {
+    height: 90vh;
+  }
+  #hero .carousel-item {
+    height: 90vh;
+  }
+}
+
+@media (min-width: 1024px) {
+  #hero p {
+    width: 50%;
+  }
+  #hero .carousel-control-prev,
+  #hero .carousel-control-next {
+    width: 5%;
+  }
+}
+#hero .carousel-indicators li::before {
+  content: "" !important;
+}
+#hero .carousel-indicators {
+  counter-reset: none !important;
+}
+
+#hero .carousel-indicators li::marker {
+  content: "" !important;  /* hide marker */
+}
+
+#hero .carousel-indicators {
+  list-style: none !important;
+}
+
+#hero .carousel-indicators li {
+  list-style-type: none !important;
+}
+
+
+<!-- =========================
+     HERO SECTION end
+========================= -->
+
 /* base card style */
 .service-card {
   border: 0.5px solid #ededed;
@@ -234,56 +518,6 @@ body {
 .stat-card:hover i,
 .stat-card:hover div {
   color: #ffffff;
-}
-
-/* ========================
-     HOVER EFFECT (GLOBAL)
-   ======================== */
-.stat-card:hover {
-  background: #ff7a1a;
-  color: #ffffff;
-  transform: translateY(-10px);
-  box-shadow: 0 14px 28px rgba(0,0,0,0.18);
-  cursor: pointer;
-}
-
-.stat-card:hover i {
-  color: #ffffff;
-}
-
-/* icon box */
-.service-icon {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto 20px;
-  border-radius: 8px;
-  background-color: #ff7a1a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  font-size: 26px;
-  transition: background 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
-}
-
-.service-icon i {
-  color: #ffffff;
-}
-
-/* title + text default */
-.service-title {
-  font-size: 17px;
-  font-weight: 600;
-  margin-bottom: 10px;
-  color: #444;
-  transition: color 0.35s ease;
-}
-
-.service-desc {
-  font-size: 13px;
-  line-height: 1.7;
-  color: #666;
-  transition: color 0.35s ease;
 }
 
 /* ========================
@@ -566,7 +800,8 @@ body {
       font-style: italic;
       color: #666;
     }
-/* DESKTOP (default) stays the same */
+	
+	/* DESKTOP (default) stays the same */
 .about-detail-inner {
   display: grid;
   grid-template-columns: 1.1fr 1.2fr;
@@ -595,6 +830,7 @@ body {
     display: block;
   }
 }
+
 
     /* SERVICES SECTION */
     .services-section {
@@ -1097,7 +1333,7 @@ footer.site-footer .logo-text .company-name {
   }
 }
 
-/* Mobile – still 1 columns */
+/* Mobile – still 2 columns */
 @media (max-width: 600px) {
   .services-grid {
     grid-template-columns: repeat(1, 1fr);
