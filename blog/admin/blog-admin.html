@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Blog Admin — Rich Editor</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body{font-family:Arial,system-ui; max-width:980px;margin:20px auto;padding:18px}
+    label{display:block;margin-top:12px;font-weight:700}
+    input, textarea { width:100%; padding:10px; border:1px solid #ccc; border-radius:6px; margin-top:6px; box-sizing:border-box }
+    .row{display:flex; gap:12px}
+    .col{flex:1}
+    button{margin-top:14px;padding:12px 18px;background:#0b1320;color:#fff;border:0;border-radius:8px;cursor:pointer}
+    #status{margin-top:12px;font-weight:700}
+    pre{background:#f6f6f8;padding:12px;border-radius:6px;overflow:auto}
+  </style>
+
+  <!-- TinyMCE CDN -->
+<script src="https://cdn.tiny.cloud/1/6s474jfinscpy6zvlfuts6itz5e2dggxko06nbr8rgq9jfu5/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+
+  <h1>Publish Blog (Rich Editor)</h1>
+
+  <label>Title</label>
+  <input id="title" placeholder="Post title">
+
+  <div class="row">
+    <div class="col">
+      <label>Slug (url-safe)</label>
+      <input id="slug" placeholder="auto-generated-from-title-if-empty">
+    </div>
+    <div class="col">
+      <label>Date</label>
+      <input id="date" type="date">
+    </div>
+  </div>
+
+  <label>Featured Image URL</label>
+  <input id="image" placeholder="assets/img/blog/cover.jpg">
+
+  <div class="row">
+    <div class="col">
+      <label>Categories (comma separated)</label>
+      <input id="categories" placeholder="BIM, Estimation">
+    </div>
+    <div class="col">
+      <label>Tags (comma separated)</label>
+      <input id="tags" placeholder="revit, mto, boqs">
+    </div>
+  </div>
+
+  <label>Excerpt (optional)</label>
+  <textarea id="excerpt" rows="3" placeholder="Short summary for list page (optional)"></textarea>
+
+  <label>Content (rich editor)</label>
+  <textarea id="content"></textarea>
+
+  <div style="display:flex;gap:12px;align-items:center">
+    <button id="publish">Publish</button>
+    <div id="status">Status: idle</div>
+  </div>
+
+  <h3>Server response (debug)</h3>
+  <pre id="debug">—</pre>
+
+<script>
+// INIT TinyMCE
+tinymce.init({
+  selector: '#content',
+  height: 420,
+  menubar: false,
+  plugins: [
+    'link', 'lists', 'table', 'image', 'autolink', 'code', 'paste', 'autoresize'
+  ],
+  toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent | link image | code',
+  content_style: "body { font-family: Arial, system-ui; font-size: 16px }"
+});
+
+// helper: create slug-safe string
+function slugify(s) {
+  return (s || '').toString().toLowerCase()
+    .replace(/[^\w\s-]/g,'')   // remove non word chars
+    .trim()
+    .replace(/\s+/g,'-');      // spaces -> -
+}
+
+// publish handler
+document.getElementById('publish').addEventListener('click', async () => {
+  const title = document.getElementById('title').value.trim();
+  const rawSlug = document.getElementById('slug').value.trim();
+  const slug = rawSlug || slugify(title) || ('post-' + Date.now());
+  const date = document.getElementById('date').value || new Date().toISOString().slice(0,10);
+  const image = document.getElementById('image').value.trim();
+  const categoriesRaw = document.getElementById('categories').value.trim();
+  const tagsRaw = document.getElementById('tags').value.trim();
+  const excerpt = document.getElementById('excerpt').value.trim();
+  const content = tinymce.get('content').getContent();
+
+  if (!title || !content) {
+    document.getElementById('status').innerText = 'Status: Title and content are required';
+    return;
+  }
+
+  // categories/tags: send as arrays
+  const categories = categoriesRaw ? categoriesRaw.split(',').map(s=>s.trim()).filter(Boolean) : [];
+  const tags = tagsRaw ? tagsRaw.split(',').map(s=>s.trim()).filter(Boolean) : [];
+
+  const payload = {
+    title, slug, date, image, categories, tags, excerpt, content
+  };
+
+  document.getElementById('status').innerText = 'Status: Publishing...';
+  document.getElementById('debug').innerText = '';
+
+  try {
+    // NOTE: admin is in /admin/ folder; save_post.php is one level up
+    const res = await fetch('../save_post.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    const text = await res.text();
+    let json;
+    try { json = JSON.parse(text); } catch(e) { json = { status: 'error', message: 'Invalid JSON response', raw: text }; }
+
+    document.getElementById('debug').innerText = JSON.stringify(json, null, 2);
+    if (json.status === 'success') {
+      document.getElementById('status').innerText = 'Status: ✅ Saved: ' + json.file;
+      // optional: clear form except title
+      //document.getElementById('title').value=''; tinymce.get('content').setContent('');
+    } else {
+      document.getElementById('status').innerText = 'Status: Error — ' + (json.message || 'unknown');
+    }
+  } catch (err) {
+    document.getElementById('status').innerText = 'Status: Network Error';
+    document.getElementById('debug').innerText = String(err);
+    console.error(err);
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+; config.ini — site-specific settings for save_post.php
+[auth]
+user = "root"
+pass = ""
+
+[paths]
+; location where posts.json will be read/written (absolute or relative to this file)
+posts_path = "posts.json"
+
+[settings]
+; set to 1 to create a static blog-<slug>.html file when publishing (requires write perms)
+generate_static = 0
+
+; base URL to use when generating static files or previews (only if needed)
+base_url = "http://localhost/techpub/blog/"
+
+storage_path = "posts"
+

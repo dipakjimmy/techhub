@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ASISA — Blog</title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  
+  <!-- Site CSS -->
+  <link rel="stylesheet" href="assets/css/main.css">
+  
+  <style>
+    /* Make header containers sticky */
+    #header-topbar-include {
+      position: sticky;
+      top: 0;
+      z-index: 1001;
+    }
+    
+    #header-mobile-include {
+      position: sticky;
+      top: 0;
+      z-index: 1001;
+    }
+    
+    /* Sidebar sticky positioning - adjust based on header height */
+    .sidebar {
+      position: sticky;
+      top: 150px; /* Account for top bar + main header */
+    }
+    
+    /* Enhanced post grid styling */
+    #postsGrid {
+      margin-top: 20px;
+    }
+    
+    /* Post card enhancements */
+    #postsGrid .service-card {
+      transition: all 0.3s ease;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #ffffff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    #postsGrid .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      border-color: #0b61a4;
+    }
+    
+    /* Post image styling */
+    #postsGrid .service-card img {
+      transition: transform 0.3s ease;
+      border-radius: 8px 8px 0 0;
+    }
+    
+    #postsGrid .service-card:hover img {
+      transform: scale(1.05);
+    }
+    
+    /* Post title styling */
+    #postsGrid .service-card h4 {
+      color: #1e293b;
+      font-weight: 600;
+      line-height: 1.4;
+      transition: color 0.2s ease;
+    }
+    
+    #postsGrid .service-card:hover h4 {
+      color: #0b61a4;
+    }
+    
+    /* Read more button styling */
+    #postsGrid .service-card .btn-outline {
+      border: 2px solid #0b61a4;
+      color: #0b61a4;
+      font-weight: 500;
+      padding: 8px 20px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+    
+    #postsGrid .service-card .btn-outline:hover {
+      background: #0b61a4;
+      color: #ffffff;
+      transform: translateX(4px);
+    }
+    
+    /* Ensure 3 posts per row on large screens (lg and above) */
+    @media (min-width: 992px) {
+      #postsGrid .col-lg-4 {
+        flex: 0 0 auto;
+        width: 33.333333%;
+        max-width: 33.333333%;
+        margin-bottom: 24px;
+      }
+    }
+    
+    /* 2 posts per row on medium screens (md) */
+    @media (min-width: 768px) and (max-width: 991px) {
+      #postsGrid .col-md-6 {
+        flex: 0 0 auto;
+        width: 50%;
+        max-width: 50%;
+        margin-bottom: 24px;
+      }
+      
+      #postsGrid .col-lg-4 {
+        width: 50%;
+        max-width: 50%;
+      }
+    }
+    
+    /* 1 post per row on small screens */
+    @media (max-width: 767px) {
+      .sidebar {
+        top: 100px; /* Smaller header on mobile */
+      }
+      
+      #postsGrid .col-md-6,
+      #postsGrid .col-lg-4 {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-bottom: 20px;
+      }
+      
+      #postsGrid .service-card {
+        margin-bottom: 0;
+      }
+    }
+    
+    /* Ensure proper spacing and alignment */
+    #postsGrid .row {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: -12px;
+      margin-right: -12px;
+    }
+    
+    #postsGrid .row > [class*="col-"] {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+    
+    /* Loading animation */
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Improved grid spacing */
+    #postsGrid .row {
+      margin-left: -12px;
+      margin-right: -12px;
+    }
+    
+    #postsGrid .row > [class*="col-"] {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+    
+    /* Empty state styling */
+    #postsGrid .col-12 {
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+  
+  <!-- SEO Meta -->
+  <meta name="description" content="ASISA blog — BIM, Estimation, Document Control and Project tips.">
+</head>
+
+<body>
+  <!-- Header Navigation -->
+  <div id="header-topbar-include"></div>
+  <div id="header-mobile-include"></div>
+  <script src="assets/js/includes.js"></script>
+
+  <!-- Hero Section -->
+  <section class="doc-hero" style="margin: 28px 16px;">
+    <div class="doc-hero__inner">
+      <div class="doc-hero__content">
+        <h1 class="doc-hero__title">ASISA Blog</h1>
+        <p class="doc-hero__lead">Insights on BIM, estimation, document control, and project delivery — tips & templates for busy teams.</p>
+        <a class="doc-hero__cta" href="#posts">See Latest Posts</a>
+      </div>
+      <div class="doc-hero__media">
+        <img src="assets/img/blog-hero.png" alt="Blog hero image">
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Area -->
+  <main class="container" id="posts" style="max-width: 1400px;">
+    <div class="row">
+      
+      <!-- Posts Grid Section - Full Width -->
+      <section id="postsSection" class="col-12">
+        <!-- Search Widget -->
+        <div class="pm-form" style="margin-bottom: 24px; max-width: 600px;">
+          <label class="form-label" style="font-weight: 600; margin-bottom: 8px;">Search the blog</label>
+          <div style="display: flex; gap: 8px;">
+            <input id="searchInput" class="form-control" placeholder="Search articles..." oninput="filterPosts()" style="padding: 12px 16px; border-radius: 8px; border: 2px solid #e5e7eb;">
+            <button class="btn btn-outline" onclick="document.getElementById('searchInput').value = ''; filterPosts();" style="padding: 12px 24px; border-radius: 8px;">Clear</button>
+          </div>
+        </div>
+        
+        <!-- Categories Filter -->
+        <div style="margin-bottom: 24px;" id="categoriesWidget">
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+            <span style="font-weight: 600; color: #64748b; margin-right: 8px;">Filter by:</span>
+            <button class="estimation-btn active" onclick="filterBy('All')" style="padding: 8px 16px; border-radius: 6px; border: 2px solid #0b61a4; background: #0b61a4; color: #fff; font-weight: 500; cursor: pointer; transition: all 0.2s;">All</button>
+          </div>
+        </div>
+        
+        <div class="row g-4" id="postsGrid" style="display: flex; flex-wrap: wrap;">
+          <!-- Posts will be dynamically inserted here -->
+        </div>
+      </section>
+
+      <!-- Sidebar - Hidden, only posts shown -->
+      <aside class="col-lg-4" style="display: none;">
+      </aside>
+      <script>
+(() => {
+  const PAGE_SIZE = 10; // 10 posts per page
+
+  function fmtDate(d) {
+    try { return new Date(d).toLocaleDateString('en-GB'); }
+    catch (e) { return d || ''; }
+  }
+  function escapeHtml(s){
+    if (!s) return '';
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  // state
+  let INDEX = [];      // array of metadata from posts/index.json
+  let filtered = [];   // filtered subset of INDEX (search / category)
+  let currentPage = 1;
+  let currentCategory = 'All';
+  let currentQuery = '';
+
+  // fetch aggregated posts from server-side PHP and init
+  async function init() {
+    const grid = document.getElementById('postsGrid');
+    grid.innerHTML = '<div class="col-12" style="padding:60px; text-align:center;"><div style="display:inline-block; width:40px; height:40px; border:4px solid #e5e7eb; border-top-color:#0b61a4; border-radius:50%; animation:spin 0.8s linear infinite;"></div><p style="margin-top:20px; color:#64748b; font-size:16px;">Loading posts…</p></div>';
+    try {
+      const resp = await fetch('fetch_blogs.php', { cache: 'no-cache' });
+      if (!resp.ok) throw new Error('fetch_blogs.php not found');
+      const data = await resp.json();
+      if (!data || !Array.isArray(data.posts)) throw new Error('fetch_blogs.php did not return posts array');
+      INDEX = data.posts.slice().sort((a,b)=> new Date(b.date) - new Date(a.date));
+      filtered = INDEX.slice();
+      buildCategoryButtons(INDEX);
+      renderPage(1);
+      attachGlobalHandlers();
+      // log any server-side parsing errors
+      if (Array.isArray(data.errors) && data.errors.length) console.warn('fetch_blogs.php errors:', data.errors);
+    } catch (err) {
+      console.error(err);
+      grid.innerHTML = '<div style="padding:20px;color:#cf2a2a">Could not load posts (fetch_blogs.php). Check server endpoint & JSON format.</div>';
+    }
+  }
+
+  // helper: make safe slug from title
+  function slugify(s) {
+    if (!s) return '';
+    return String(s).toLowerCase()
+      .trim()
+      .replace(/&nbsp;|&amp;|&#\d+;|\s+/g, '-')       // handle HTML entities/space
+      .replace(/[^\w\-]+/g, '')                      // remove non-word chars
+      .replace(/\-\-+/g, '-')                        // collapse dashes
+      .replace(/^-+|-+$/g, '');                      // trim dashes
+  }
+
+  // helper: resolve filename from metadata (multiple fallbacks)
+  function resolveFilename(meta) {
+    if (!meta) return '';
+    // direct fields
+    if (meta.filename) return meta.filename;
+    if (meta.file) return meta.file;
+    if (meta.path) return meta.path;
+    if (meta.slug) return meta.slug.endsWith('.json') ? meta.slug : meta.slug + '.json';
+
+    // try slug from known fields
+    if (meta.slug) return meta.slug + '.json';
+    // try id
+    if (meta.id) return String(meta.id) + '.json';
+    // try title-based slug
+    if (meta.title) {
+      const s = slugify(meta.title);
+      if (s) return s + '.json';
+    }
+
+    // last resort: try to find matching entry in INDEX by title (case-insensitive)
+    if (Array.isArray(INDEX) && meta.title) {
+      const found = INDEX.find(m => (m.title||'').toLowerCase() === (meta.title||'').toLowerCase());
+      if (found) {
+        if (found.filename) return found.filename;
+        if (found.slug) return (found.slug.endsWith('.json') ? found.slug : found.slug + '.json');
+        if (found.title) {
+          const s2 = slugify(found.title);
+          if (s2) return s2 + '.json';
+        }
+      }
+    }
+
+    return '';
+  }
+
+  // create a post card element from metadata
+  function createCard(meta) {
+    const col = document.createElement('div');
+    col.className = 'col-md-6 col-lg-4';
+    
+    const card = document.createElement('div');
+    card.className = 'service-card';
+    card.style.padding = '0';
+    card.style.height = '100%';
+    card.style.display = 'flex';
+    card.style.flexDirection = 'column';
+    card.style.overflow = 'hidden';
+    
+    // Image container with overlay effect
+    const imageContainer = document.createElement('div');
+    imageContainer.style.position = 'relative';
+    imageContainer.style.width = '100%';
+    imageContainer.style.height = '220px';
+    imageContainer.style.overflow = 'hidden';
+    imageContainer.style.backgroundColor = '#e2e8f0';
+    
+    if (meta.image) {
+      const img = document.createElement('img');
+      img.src = meta.image;
+      img.alt = escapeHtml(meta.title || '');
+      img.style.width = '100%';
+      img.style.height = '100%';
+      img.style.objectFit = 'cover';
+      img.style.display = 'block';
+      img.loading = 'lazy';
+      imageContainer.appendChild(img);
+    } else {
+      // Placeholder image if none provided
+      const placeholder = document.createElement('div');
+      placeholder.style.width = '100%';
+      placeholder.style.height = '100%';
+      placeholder.style.display = 'flex';
+      placeholder.style.alignItems = 'center';
+      placeholder.style.justifyContent = 'center';
+      placeholder.style.color = '#94a3b8';
+      placeholder.style.background = 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)';
+      placeholder.innerHTML = '<i class="fas fa-image" style="font-size: 48px; opacity: 0.5;"></i>';
+      imageContainer.appendChild(placeholder);
+    }
+    
+    // Category badge overlay on image
+    if (meta.categories && meta.categories.length > 0) {
+      const categoryBadge = document.createElement('div');
+      categoryBadge.style.position = 'absolute';
+      categoryBadge.style.top = '12px';
+      categoryBadge.style.right = '12px';
+      categoryBadge.style.background = 'rgba(11, 97, 164, 0.9)';
+      categoryBadge.style.color = '#ffffff';
+      categoryBadge.style.padding = '4px 12px';
+      categoryBadge.style.borderRadius = '20px';
+      categoryBadge.style.fontSize = '12px';
+      categoryBadge.style.fontWeight = '600';
+      categoryBadge.style.textTransform = 'uppercase';
+      categoryBadge.style.letterSpacing = '0.5px';
+      categoryBadge.textContent = meta.categories[0];
+      imageContainer.appendChild(categoryBadge);
+    }
+    
+    card.appendChild(imageContainer);
+    
+    // Content container
+    const contentContainer = document.createElement('div');
+    contentContainer.style.padding = '20px';
+    contentContainer.style.display = 'flex';
+    contentContainer.style.flexDirection = 'column';
+    contentContainer.style.flexGrow = '1';
+    
+    // Meta (date)
+    const metaDiv = document.createElement('div');
+    metaDiv.style.color = '#6b6b6b';
+    metaDiv.style.fontSize = '13px';
+    metaDiv.style.marginBottom = '10px';
+    metaDiv.style.display = 'flex';
+    metaDiv.style.alignItems = 'center';
+    metaDiv.style.gap = '8px';
+    
+    const dateIcon = document.createElement('i');
+    dateIcon.className = 'far fa-calendar';
+    dateIcon.style.fontSize = '12px';
+    metaDiv.appendChild(dateIcon);
+    
+    const dateStr = fmtDate(meta.date);
+    metaDiv.appendChild(document.createTextNode(dateStr));
+    
+    contentContainer.appendChild(metaDiv);
+    
+    // Title
+    const title = document.createElement('h4');
+    title.style.marginBottom = '12px';
+    title.style.fontSize = '20px';
+    title.style.fontWeight = '600';
+    title.style.lineHeight = '1.4';
+    title.style.color = '#1e293b';
+    title.style.minHeight = '56px';
+    title.textContent = escapeHtml(meta.title || 'Untitled');
+    contentContainer.appendChild(title);
+    
+    // Excerpt
+    const excerpt = document.createElement('p');
+    excerpt.style.color = '#64748b';
+    excerpt.style.marginBottom = '16px';
+    excerpt.style.flexGrow = '1';
+    excerpt.style.fontSize = '15px';
+    excerpt.style.lineHeight = '1.6';
+    excerpt.style.display = '-webkit-box';
+    excerpt.style.webkitLineClamp = '3';
+    excerpt.style.webkitBoxOrient = 'vertical';
+    excerpt.style.overflow = 'hidden';
+    excerpt.textContent = escapeHtml(meta.excerpt || 'No excerpt available.');
+    contentContainer.appendChild(excerpt);
+    
+    // Read more button
+    const btn = document.createElement('a');
+    btn.href = '#';
+    btn.className = 'btn btn-outline';
+    btn.innerHTML = 'Read more <i class="fas fa-arrow-right" style="margin-left: 6px; font-size: 12px;"></i>';
+    const filename = resolveFilename(meta);
+    btn.setAttribute('data-open', filename);
+    btn.style.marginTop = 'auto';
+    btn.style.alignSelf = 'flex-start';
+    btn.style.display = 'inline-flex';
+    btn.style.alignItems = 'center';
+    contentContainer.appendChild(btn);
+    
+    card.appendChild(contentContainer);
+    col.appendChild(card);
+    return col;
+  }
+
+  // render given page (1-based)
+  function renderPage(page) {
+    currentPage = Math.max(1, page);
+    const total = filtered.length;
+    const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+    if (currentPage > totalPages) currentPage = totalPages;
+    const start = (currentPage - 1) * PAGE_SIZE;
+    const slice = filtered.slice(start, start + PAGE_SIZE);
+
+    const grid = document.getElementById('postsGrid');
+    grid.innerHTML = '';
+    if (!slice.length) {
+      grid.innerHTML = '<div class="col-12" style="padding:40px; text-align:center; color:#64748b;"><i class="fas fa-search" style="font-size:48px; margin-bottom:16px; opacity:0.3; display:block;"></i><p style="font-size:18px; margin:0;">No posts found.</p><p style="font-size:14px; margin-top:8px;">Try adjusting your search or filter criteria.</p></div>';
+    } else {
+      slice.forEach(meta => grid.appendChild(createCard(meta)));
+    }
+    renderPagination(totalPages);
+    attachOpenHandlers(); // attach click handlers to new buttons
+    
+    // Smooth scroll to top of posts section
+    document.getElementById('postsSection')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // pagination controls (enhanced)
+  function renderPagination(totalPages) {
+    // remove old pagination if any
+    let container = document.getElementById('postsPagination');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'postsPagination';
+      container.style.marginTop = '32px';
+      container.style.marginBottom = '20px';
+      document.getElementById('postsSection').appendChild(container);
+    }
+    
+    if (totalPages <= 1) {
+      container.innerHTML = '';
+      return;
+    }
+    
+    // build buttons
+    container.innerHTML = '';
+    const nav = document.createElement('nav');
+    nav.setAttribute('aria-label','Posts pages');
+    nav.style.display = 'flex';
+    nav.style.justifyContent = 'center';
+    const ul = document.createElement('ul');
+    ul.className = 'pagination';
+    ul.style.margin = '0';
+    ul.style.flexWrap = 'wrap';
+    ul.style.gap = '4px';
+
+    function makeLi(label, page, disabled=false, active=false) {
+      const li = document.createElement('li');
+      li.className = 'page-item' + (disabled ? ' disabled' : '') + (active ? ' active' : '');
+      li.style.listStyle = 'none';
+      li.style.margin = '0';
+      const a = document.createElement('a');
+      a.className = 'page-link';
+      a.href = '#';
+      a.innerText = label;
+      a.dataset.page = page;
+      a.style.cssText = 'display:block; padding:8px 16px; border:1px solid #e5e7eb; border-radius:6px; text-decoration:none; color:#64748b; background:#fff; transition:all 0.2s; min-width:44px; text-align:center;';
+      if (active) {
+        a.style.background = '#0b61a4';
+        a.style.color = '#fff';
+        a.style.borderColor = '#0b61a4';
+      }
+      if (disabled) {
+        a.style.opacity = '0.5';
+        a.style.cursor = 'not-allowed';
+      } else {
+        a.onmouseover = function() {
+          if (!active && !disabled) {
+            this.style.background = '#f1f5f9';
+            this.style.borderColor = '#0b61a4';
+            this.style.color = '#0b61a4';
+          }
+        };
+        a.onmouseout = function() {
+          if (!active && !disabled) {
+            this.style.background = '#fff';
+            this.style.borderColor = '#e5e7eb';
+            this.style.color = '#64748b';
+          }
+        };
+        a.onclick = (e) => { e.preventDefault(); if (!disabled) renderPage(page); };
+      }
+      li.appendChild(a);
+      return li;
+    }
+
+    // Prev
+
+    // show up to 7 page numbers (compact)
+    const maxButtons = 7;
+    let start = Math.max(1, currentPage - Math.floor(maxButtons/2));
+    let end = start + maxButtons - 1;
+    if (end > totalPages) { end = totalPages; start = Math.max(1, end - maxButtons + 1); }
+
+    // First page if not in range
+    if (start > 1) {
+      ul.appendChild(makeLi('1', 1));
+      if (start > 2) {
+        const ellipsis = document.createElement('li');
+        ellipsis.style.listStyle = 'none';
+        ellipsis.style.padding = '8px 4px';
+        ellipsis.innerHTML = '<span style="color:#94a3b8;">...</span>';
+        ul.appendChild(ellipsis);
+      }
+    }
+
+    for (let p = start; p <= end; p++) {
+      ul.appendChild(makeLi(p, p, false, p === currentPage));
+    }
+
+    // Last page if not in range
+    if (end < totalPages) {
+      if (end < totalPages - 1) {
+        const ellipsis = document.createElement('li');
+        ellipsis.style.listStyle = 'none';
+        ellipsis.style.padding = '8px 4px';
+        ellipsis.innerHTML = '<span style="color:#94a3b8;">...</span>';
+        ul.appendChild(ellipsis);
+      }
+      ul.appendChild(makeLi(totalPages, totalPages));
+    }
+
+    // Next
+
+    nav.appendChild(ul);
+    container.appendChild(nav);
+  }
+
+  // attach "Read article" click handlers
+  function attachOpenHandlers() {
+    document.querySelectorAll('[data-open]').forEach(el => {
+      el.onclick = async (ev) => {
+        ev.preventDefault();
+        const token = el.getAttribute('data-open') || el.textContent || '';
+        let filename = token.trim();
+
+        // if data-open empty but link text is a title, try to resolve by title
+        if (!filename) {
+          const titleText = (el.textContent || '').trim();
+          const found = INDEX.find(m => (m.title||'').toLowerCase() === titleText.toLowerCase());
+          if (found) filename = resolveFilename(found);
+        }
+
+        if (!filename) return alert('Post file not set');
+        try {
+          const resp = await fetch('posts/' + filename, { cache: 'no-cache' });
+          if (!resp.ok) throw new Error('post file not found');
+          const post = await resp.json();
+          openSinglePost(post);
+        } catch (err) {
+          console.error(err);
+          alert('Could not load post content. Check posts/' + filename);
+        }
+      };
+    });
+  }
+
+  // open single post view (post is full JSON content)
+  function openSinglePost(p) {
+    document.getElementById('singleTitle').innerText = p.title || 'Untitled';
+    document.getElementById('singleMeta').innerText = `${fmtDate(p.date)} · ${(p.categories || []).join(', ') || 'Uncategorized'}`;
+    document.getElementById('singleFeature').src = p.image || 'assets/img/blog/blog-hero.jpg';
+    document.getElementById('singleContent').innerHTML = p.content || `<p>${escapeHtml(p.excerpt||'No content available.')}</p>`;
+    document.getElementById('singlePost').style.display = 'block';
+    document.querySelector('main.container').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // build recent posts list from INDEX metadata (first 5)
+  function buildRecent(postsMeta) {
+    const list = document.getElementById('recentPostsList');
+    if (!list) return;
+    
+    list.innerHTML = '';
+    const recentPosts = postsMeta.slice(0, 5);
+    
+    if (recentPosts.length === 0) {
+      list.innerHTML = '<li style="padding: 12px; text-align: center; color: #6b6b6b;">No recent posts available.</li>';
+      return;
+    }
+    
+    recentPosts.forEach(meta => {
+      const slug = meta.slug || resolveFilename(meta).replace('.json', '');
+      const li = document.createElement('li');
+      li.style.marginBottom = '12px';
+      li.style.paddingBottom = '12px';
+      li.style.borderBottom = '1px solid #e5e7eb';
+      
+      const link = document.createElement('a');
+      link.href = slug + '/';
+      link.style.color = '#0b61a4';
+      link.style.textDecoration = 'none';
+      link.style.display = 'block';
+      link.style.marginBottom = '4px';
+      link.style.fontWeight = '500';
+      link.style.transition = 'color 0.2s';
+      link.textContent = escapeHtml(meta.title || 'Untitled');
+      link.onmouseover = function() { this.style.color = '#0a4d7a'; };
+      link.onmouseout = function() { this.style.color = '#0b61a4'; };
+      // Let the browser handle navigation naturally for better UX
+      
+      const dateDiv = document.createElement('div');
+      dateDiv.style.fontSize = '13px';
+      dateDiv.style.color = '#6b6b6b';
+      dateDiv.textContent = fmtDate(meta.date);
+      
+      li.appendChild(link);
+      li.appendChild(dateDiv);
+      list.appendChild(li);
+    });
+  }
+
+  // build dynamic category buttons from INDEX
+  function buildCategoryButtons(postsMeta) {
+    const set = new Set();
+    postsMeta.forEach(m => (m.categories || []).forEach(c => set.add(c)));
+    const cats = Array.from(set).sort();
+    const widget = document.getElementById('categoriesWidget');
+    if (!widget) return;
+    
+    const container = widget.querySelector('div') || document.createElement('div');
+    if (!container.parentElement) {
+      widget.appendChild(container);
+    }
+    
+    container.style.display = 'flex';
+    container.style.flexWrap = 'wrap';
+    container.style.gap = '8px';
+    container.style.alignItems = 'center';
+    
+    // Keep the "All" button and add category buttons
+    const allBtn = container.querySelector('button');
+    if (allBtn) {
+      allBtn.onclick = () => filterBy('All');
+    }
+
+    // Remove existing category buttons (keep only "All")
+    const existingButtons = container.querySelectorAll('button');
+    existingButtons.forEach(btn => {
+      if (btn.textContent.trim() !== 'All') {
+        btn.remove();
+      }
+    });
+
+    cats.forEach(c => {
+      const b = document.createElement('button');
+      b.className = 'estimation-btn';
+      b.textContent = c;
+      b.style.padding = '8px 16px';
+      b.style.borderRadius = '6px';
+      b.style.border = '2px solid #e5e7eb';
+      b.style.background = '#fff';
+      b.style.color = '#64748b';
+      b.style.fontWeight = '500';
+      b.style.cursor = 'pointer';
+      b.style.transition = 'all 0.2s';
+      b.onmouseover = function() {
+        if (!this.classList.contains('active')) {
+          this.style.borderColor = '#0b61a4';
+          this.style.color = '#0b61a4';
+        }
+      };
+      b.onmouseout = function() {
+        if (!this.classList.contains('active')) {
+          this.style.borderColor = '#e5e7eb';
+          this.style.color = '#64748b';
+        }
+      };
+      b.onclick = () => filterBy(c);
+      container.appendChild(b);
+    });
+  }
+
+  // search: uses index metadata (fast) then re-renders page 1
+  function doSearch(q) {
+    currentQuery = q.trim().toLowerCase();
+    applyFilters();
+  }
+
+  // category filter
+  function filterBy(tag) {
+    currentCategory = tag;
+    // toggle active class on buttons
+    document.querySelectorAll('button.estimation-btn').forEach(b => {
+      const isActive = b.textContent.trim() === tag;
+      b.classList.toggle('active', isActive);
+      if (isActive) {
+        b.style.background = '#0b61a4';
+        b.style.color = '#fff';
+        b.style.borderColor = '#0b61a4';
+      } else {
+        b.style.background = '#fff';
+        b.style.color = '#64748b';
+        b.style.borderColor = '#e5e7eb';
+      }
+    });
+    applyFilters();
+  }
+
+  // apply category + search to INDEX -> filtered -> render page 1
+  function applyFilters() {
+    filtered = INDEX.filter(m => {
+      // category
+      const catOk = (currentCategory === 'All') || ((m.categories||[]).includes(currentCategory));
+      // search query on title/excerpt
+      const q = currentQuery;
+      const qOk = !q || ( (m.title||'').toLowerCase().includes(q) || (m.excerpt||'').toLowerCase().includes(q) );
+      return catOk && qOk;
+    });
+    renderPage(1);
+  }
+
+  // attach search input debounce and any dynamic global handlers
+  function attachGlobalHandlers() {
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+      let t;
+      searchInput.oninput = () => {
+        clearTimeout(t);
+        t = setTimeout(() => doSearch(searchInput.value || ''), 200);
+      };
+    }
+    // attach clear button handler if present
+    document.querySelectorAll('[onclick]').forEach(el=>{
+      // no-op — we rely on data-open handlers for dynamic links
+    });
+
+    // the back button for single post is already wired to closePost() in your HTML
+  }
+
+  // expose closePost to restore listing
+  window.closePost = function() {
+    document.getElementById('singlePost').style.display = 'none';
+    document.querySelector('main.container').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+// compute base URL for the current HTML file (folder containing index.html)
+const basePath = (function () {
+  // remove filename from pathname, keep leading path e.g. /techpub/blog
+  const p = location.pathname;
+  return p.endsWith('/') ? p.slice(0, -1) : p.slice(0, p.lastIndexOf('/'));
+})();
+
+// helper to build URLs
+function url(path) {
+  // remove leading slash on path if present then join with basePath
+  return basePath + '/' + path.replace(/^\/+/,'');
+}
+
+  // expose openPost(filename) so older sidebar hardcoded links can work; it will fetch the file
+  window.openPost = async function(arg) {
+    let filename = String(arg || '').trim();
+    // if arg is a number try id lookup
+    if (/^\d+$/.test(filename)) {
+      const meta = INDEX.find(m => String(m.id) === filename);
+      if (meta) filename = resolveFilename(meta);
+    }
+
+    // if arg looks like a title (no .json) try to find by title
+    if (!filename || !filename.toLowerCase().endsWith('.json')) {
+      const found = INDEX.find(m => (m.title||'').toLowerCase() === String(arg||'').toLowerCase());
+      if (found) filename = resolveFilename(found);
+    }
+
+    if (!filename) {
+      // fallback: slugify input and append .json
+      const s = slugify(String(arg||''));
+      if (s) filename = s + '.json';
+    }
+
+    if (!filename) return alert('Post not found');
+    try {
+      const resp = await fetch('posts/' + filename, { cache: 'no-cache' });
+      if (!resp.ok) throw new Error('post file not found');
+      const post = await resp.json();
+      openSinglePost(post);
+    } catch (err) {
+      console.error(err);
+      alert('Could not load post content. Check posts/' + filename);
+    }
+  };
+
+  // start
+  document.addEventListener('DOMContentLoaded', init);
+})();
+</script>
+    </div>
+  </main>
+
+  <!-- Single Post View (hidden by default) -->
+  <section id="singlePost" style="display: none; max-width: 900px; margin: 28px auto; padding: 0 16px;">
+    <a class="btn btn-outline" onclick="closePost()" style="margin-bottom: 10px;">← Back to articles</a>
+    <article class="service-card" style="padding: 28px;">
+      <h2 id="singleTitle" style="margin-bottom: 8px;">Sample Post Title</h2>
+      <div id="singleMeta" style="color: #6b6b6b; margin-bottom: 12px;">Nov 28, 2025 · BIM</div>
+      <img id="singleFeature" src="assets/img/blog/blog-sample-1.jpg" alt="" style="width: 100%; border-radius: 6px; margin-bottom: 14px; object-fit: cover; max-height: 420px;">
+      <div id="singleContent" style="color: #334155; line-height: 1.8;">
+        <p><strong>Intro:</strong> Replace with real article content. Use headings, lists and images for clarity.</p>
+        <h4>Checklist</h4>
+        <ul>
+          <li>Coordinate models</li>
+          <li>Run clash detection</li>
+          <li>Issue coordinated drawings</li>
+        </ul>
+        <p>Author: ASISA — Quality Offshore Support</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- Software Proficiency Carousel Section -->
+  <section class="work-platforms" id="work-platforms">
+    <h3>Software Proficiency</h3>
+    <p>We use a wide range of civil and structural software for analysis, design, detailing, drafting and estimation of steel and infrastructure projects.</p>
+    
+    <div id="platformsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3500">
+      <div class="carousel-inner">
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+          <div class="software-grid">
+            <div class="software-card"><img src="assets/img/software/autodesk-civil3d.png" alt="Autodesk Civil 3D"></div>
+            <div class="software-card"><img src="assets/img/software/autodesk-navisworks.png" alt="Autodesk Navisworks"></div>
+            <div class="software-card"><img src="assets/img/software/autocad-plant3d.png" alt="AutoCAD Plant 3D"></div>
+            <div class="software-card"><img src="assets/img/software/ansys.png" alt="ANSYS"></div>
+            <div class="software-card"><img src="assets/img/software/staad-pro.png" alt="STAAD Pro V8i"></div>
+            <div class="software-card"><img src="assets/img/software/infraworks.png" alt="InfraWorks"></div>
+            <div class="software-card"><img src="assets/img/software/autodesk-bim360.png" alt="Autodesk BIM 360"></div>
+            <div class="software-card"><img src="assets/img/software/dynamo.png" alt="Dynamo"></div>
+            <div class="software-card"><img src="assets/img/software/autodesk-civil3d.png" alt="Civil 3D"></div>
+            <div class="software-card"><img src="assets/img/software/revit.png" alt="Revit"></div>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+          <div class="software-grid">
+            <div class="software-card"><img src="assets/img/software/tekla-structures.png" alt="Tekla Structures"></div>
+            <div class="software-card"><img src="assets/img/software/sds2.png" alt="SDS/2"></div>
+            <div class="software-card"><img src="assets/img/software/advance-steel.png" alt="Advance Steel"></div>
+            <div class="software-card"><img src="assets/img/software/rebarcad.png" alt="RebarCAD"></div>
+            <div class="software-card"><img src="assets/img/software/revit.png" alt="Revit"></div>
+            <div class="software-card"><img src="assets/img/software/autocad.png" alt="AutoCAD"></div>
+            <div class="software-card"><img src="assets/img/software/etabs.png" alt="ETABS"></div>
+            <div class="software-card"><img src="assets/img/software/staad-pro.png" alt="STAAD.Pro CONNECT"></div>
+            <div class="software-card"><img src="assets/img/software/plan-swift.png" alt="PlanSwift"></div>
+            <div class="software-card"><img src="assets/img/software/bluebeam.png" alt="Bluebeam Revu"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carousel Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#platformsCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#platformsCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </button>
+
+      <!-- Carousel Indicators -->
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#platformsCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#platformsCarousel" data-bs-slide-to="1"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div id="footer-include"></div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/footer.js"></script>
+  <script src="assets/js/nav.js"></script>
+
+  <!-- Post-loading is handled above (server-side aggregator + IIFE). -->
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# .htaccess for /techpub/blog/ — pretty URLs and redirect old single.php URLs
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /techpub/blog/
+
+  # Redirect old single.php?slug=some-slug  ->  /some-slug/
+  RewriteCond %{THE_REQUEST} \s/single\.php\?slug=([^\s&]+) [NC]
+  RewriteRule ^single\.php$ %1/ [R=301,L,NE]
+
+  # Internally rewrite /some-slug/ or /some-slug-123/ -> single.php?slug=some-slug
+  # Handles slugs with optional number suffixes (e.g., topic-441)
+  RewriteRule ^([A-Za-z0-9\-\_]+(?:-[0-9]+)?)/?$ single.php?slug=$1 [L,QSA]
+  
+  # Prevent direct access to PHP files (optional security)
+  RewriteCond %{THE_REQUEST} \s/+single\.php [NC]
+  RewriteRule ^single\.php$ - [F,L]
+</IfModule>
