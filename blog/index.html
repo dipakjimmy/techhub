@@ -621,7 +621,7 @@
   function openSinglePost(p) {
     document.getElementById('singleTitle').innerText = p.title || 'Untitled';
     document.getElementById('singleMeta').innerText = `${fmtDate(p.date)} · ${(p.categories || []).join(', ') || 'Uncategorized'}`;
-    document.getElementById('singleFeature').src = p.image || 'assets/img/blog/blog-hero.jpg';
+    document.getElementById('singleFeature').src = p.image || 'assets/img/blog/blog-hero.png';
     document.getElementById('singleContent').innerHTML = p.content || `<p>${escapeHtml(p.excerpt||'No content available.')}</p>`;
     document.getElementById('singlePost').style.display = 'block';
     document.querySelector('main.container').style.display = 'none';
@@ -855,7 +855,7 @@ function url(path) {
     <article class="service-card" style="padding: 28px;">
       <h2 id="singleTitle" style="margin-bottom: 8px;">Sample Post Title</h2>
       <div id="singleMeta" style="color: #6b6b6b; margin-bottom: 12px;">Nov 28, 2025 · BIM</div>
-      <img id="singleFeature" src="assets/img/blog/blog-sample-1.jpg" alt="" style="width: 100%; border-radius: 6px; margin-bottom: 14px; object-fit: cover; max-height: 420px;">
+      <img id="singleFeature" src="assets/img/blog/blog-sample-1.png" alt="" style="width: 100%; border-radius: 6px; margin-bottom: 14px; object-fit: cover; max-height: 420px;">
       <div id="singleContent" style="color: #334155; line-height: 1.8;">
         <p><strong>Intro:</strong> Replace with real article content. Use headings, lists and images for clarity.</p>
         <h4>Checklist</h4>

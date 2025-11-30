@@ -21,6 +21,10 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
   />
 
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
 </head>
 <body>
 
@@ -40,19 +44,19 @@
 
 
   <!-- STATS CARDS SECTION -->
-  <section class="stats-section">
+  <section class="stats-section" data-aos="fade-up">
     <div class="stats-container">
-      <div class="stat-card">
+      <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
         <i class="fa-solid fa-users"></i>
         <div>500+ Engineers</div>
       </div>
 
-      <div class="stat-card">
+      <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
         <i class="fa-solid fa-border-all"></i>
         <div>2+ Countries</div>
       </div>
 
-      <div class="stat-card">
+      <div class="stat-card" data-aos="zoom-in" data-aos-delay="300">
         <i class="fa-solid fa-cloud"></i>
         <div>500+ Global Clients</div>
       </div>
@@ -62,12 +66,12 @@
   <!-- ABOUT SECTION -->
   <section class="about-detail" id="about">
     <div class="about-detail-inner">
-      <div class="about-image">
+      <div class="about-image" data-aos="fade-right">
         <!-- Replace with your real image -->
         <img src="assets/img/temp.png" alt="About ASISA" />
       </div>
 
-      <div class="about-text">
+      <div class="about-text" data-aos="fade-left">
         <h2>
           We specialize in delivering enduring, precision-driven solutions for complex client challenges through integrated services and state-of-the-art engineering technologies.
         </h2>
@@ -79,15 +83,15 @@
         </p>
 
         <div class="about-services">
-          <div class="about-service-item">
+          <div class="about-service-item" data-aos="fade-up" data-aos-delay="100">
             <i class="fa-regular fa-circle-check"></i>
             <span>STEEL DETAILING</span>
           </div>
-          <div class="about-service-item">
+          <div class="about-service-item" data-aos="fade-up" data-aos-delay="200">
             <i class="fa-regular fa-circle-check"></i>
             <span>ESTIMATION AND MATERIAL TAKE-OFF</span>
           </div>
-          <div class="about-service-item">
+          <div class="about-service-item" data-aos="fade-up" data-aos-delay="300">
             <i class="fa-regular fa-circle-check"></i>
             <span>BUILDING INFORMATION MANAGEMENT (BIM)</span>
           </div>
@@ -95,7 +99,7 @@
       </div>
     </div>
 
-    <p class="about-note">
+    <p class="about-note" data-aos="fade-up" data-aos-delay="400">
       Modern projects operate in a climate defined by rapid change and increasing complexity. 
 	  Achieving predictable, high-quality outcomes demands a disciplined approach that blends 
 	  strategic planning, active monitoring, and precise project control.
@@ -104,10 +108,10 @@
 
   <!-- SERVICES SECTION -->
   <section class="services-section" id="services">
-    <h2>Services</h2>
+    <h2 data-aos="fade-up">Services</h2>
 
     <div class="services-grid">
-      <div class="service-card">
+      <div class="service-card" data-aos="fade-up" data-aos-delay="100">
         <div class="service-icon">
           <i class="fa-solid fa-s"></i>
         </div>
@@ -118,7 +122,7 @@
         </p>
       </div>
 
-      <div class="service-card">
+      <div class="service-card" data-aos="fade-up" data-aos-delay="200">
         <div class="service-icon">
           <i class="fa-solid fa-drafting-compass"></i>
         </div>
@@ -129,7 +133,7 @@
         </p>
       </div>
 
-      <div class="service-card">
+      <div class="service-card" data-aos="fade-up" data-aos-delay="300">
         <div class="service-icon">
           <i class="fa-solid fa-building-columns"></i>
         </div>
@@ -140,7 +144,7 @@
         </p>
       </div>
 
-      <div class="service-card">
+      <div class="service-card" data-aos="fade-up" data-aos-delay="400">
         <div class="service-icon">
           <i class="fa-solid fa-layer-group"></i>
         </div>
@@ -151,7 +155,7 @@
         </p>
       </div>
 
-      <div class="service-card">
+      <div class="service-card" data-aos="fade-up" data-aos-delay="500">
         <div class="service-icon">
           <i class="fa-regular fa-square-plus"></i>
         </div>
@@ -162,7 +166,7 @@
         </p>
       </div>
 
-      <div class="service-card">
+      <div class="service-card" data-aos="fade-up" data-aos-delay="600">
         <div class="service-icon">
           <i class="fa-solid fa-network-wired"></i>
         </div>
@@ -175,17 +179,415 @@
     </div>
   </section>
 
+  <!-- DETAILED SERVICES SECTION -->
+  <section class="detailed-services-section" id="detailed-services">
+    <div class="container">
+      <h2 data-aos="fade-up" class="section-title">Our Comprehensive Services</h2>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+        Delivering precision engineering solutions across multiple domains
+      </p>
+
+      <div class="detailed-services-container">
+        <!-- Service Detail 1 -->
+        <div class="detailed-service-item" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-detail-header">
+            <i class="fa-solid fa-s"></i>
+            <h3>Structural Steel Detailing and Estimation</h3>
+          </div>
+          <div class="service-detail-content">
+            <p>
+              Our structural steel detailing services encompass comprehensive shop drawings, erection drawings, 
+              and detailed fabrication drawings that meet international standards including AISC, BS, and Eurocode. 
+              We deliver precise material take-offs, cost estimation, and project documentation.
+            </p>
+            <ul class="service-features">
+              <li><i class="fa-solid fa-check"></i> Shop drawings with complete fabrication details</li>
+              <li><i class="fa-solid fa-check"></i> Erection drawings and sequencing plans</li>
+              <li><i class="fa-solid fa-check"></i> Material take-off and cost estimation</li>
+              <li><i class="fa-solid fa-check"></i> Connection design and detailing</li>
+              <li><i class="fa-solid fa-check"></i> Quality assurance and code compliance</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Service Detail 2 -->
+        <div class="detailed-service-item" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-detail-header">
+            <i class="fa-solid fa-drafting-compass"></i>
+            <h3>Structural Engineering, Design and Analysis</h3>
+          </div>
+          <div class="service-detail-content">
+            <p>
+              Our structural engineering team provides comprehensive design and analysis services for buildings 
+              and infrastructure projects. We specialize in steel, concrete, and composite material structures, 
+              ensuring optimal performance, safety, and cost-effectiveness.
+            </p>
+            <ul class="service-features">
+              <li><i class="fa-solid fa-check"></i> Structural analysis and design calculations</li>
+              <li><i class="fa-solid fa-check"></i> Load analysis and structural modeling</li>
+              <li><i class="fa-solid fa-check"></i> Seismic and wind load analysis</li>
+              <li><i class="fa-solid fa-check"></i> Foundation design and analysis</li>
+              <li><i class="fa-solid fa-check"></i> Design optimization and value engineering</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Service Detail 3 -->
+        <div class="detailed-service-item" data-aos="fade-up" data-aos-delay="300">
+          <div class="service-detail-header">
+            <i class="fa-solid fa-building-columns"></i>
+            <h3>Reinforced Concrete Detailing and Estimation</h3>
+          </div>
+          <div class="service-detail-content">
+            <p>
+              We provide comprehensive reinforced concrete detailing services with meticulous attention to 
+              rebar placement, concrete specifications, and construction sequencing. Our team ensures 
+              accuracy in material quantities and cost estimation.
+            </p>
+            <ul class="service-features">
+              <li><i class="fa-solid fa-check"></i> Rebar detailing and scheduling</li>
+              <li><i class="fa-solid fa-check"></i> Concrete quantity take-off</li>
+              <li><i class="fa-solid fa-check"></i> Formwork design and detailing</li>
+              <li><i class="fa-solid fa-check"></i> Post-tensioning detailing</li>
+              <li><i class="fa-solid fa-check"></i> Construction sequence planning</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Service Detail 4 -->
+        <div class="detailed-service-item" data-aos="fade-up" data-aos-delay="400">
+          <div class="service-detail-header">
+            <i class="fa-solid fa-layer-group"></i>
+            <h3>Precast Concrete Modeling & Detailing</h3>
+          </div>
+          <div class="service-detail-content">
+            <p>
+              Our precast concrete services focus on constructability, accuracy, and efficiency. We create 
+              detailed 3D models and shop drawings for precast elements, ensuring seamless integration 
+              with overall project design.
+            </p>
+            <ul class="service-features">
+              <li><i class="fa-solid fa-check"></i> 3D precast element modeling</li>
+              <li><i class="fa-solid fa-check"></i> Precast panel detailing and scheduling</li>
+              <li><i class="fa-solid fa-check"></i> Connection details and embedment design</li>
+              <li><i class="fa-solid fa-check"></i> Lifting and handling analysis</li>
+              <li><i class="fa-solid fa-check"></i> Production drawings and documentation</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Service Detail 5 -->
+        <div class="detailed-service-item" data-aos="fade-up" data-aos-delay="500">
+          <div class="service-detail-header">
+            <i class="fa-regular fa-square-plus"></i>
+            <h3>Structural Steel Connection Design</h3>
+          </div>
+          <div class="service-detail-content">
+            <p>
+              We specialize in designing safe, economical, and structurally efficient steel connections. 
+              Our connection designs comply with international codes and standards, ensuring optimal 
+              performance and constructability.
+            </p>
+            <ul class="service-features">
+              <li><i class="fa-solid fa-check"></i> Moment, shear, and axial connection design</li>
+              <li><i class="fa-solid fa-check"></i> Bolted and welded connection detailing</li>
+              <li><i class="fa-solid fa-check"></i> Connection optimization for cost and performance</li>
+              <li><i class="fa-solid fa-check"></i> Special connection design for seismic zones</li>
+              <li><i class="fa-solid fa-check"></i> Connection calculation reports</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Service Detail 6 -->
+        <div class="detailed-service-item" data-aos="fade-up" data-aos-delay="600">
+          <div class="service-detail-header">
+            <i class="fa-solid fa-network-wired"></i>
+            <h3>Infrastructure Design & Detailing</h3>
+          </div>
+          <div class="service-detail-content">
+            <p>
+              Our infrastructure services cover a comprehensive range of design and detailing solutions 
+              for transportation, utilities, and communication infrastructure projects.
+            </p>
+            <ul class="service-features">
+              <li><i class="fa-solid fa-check"></i> Bridge and highway design</li>
+              <li><i class="fa-solid fa-check"></i> Utility infrastructure detailing</li>
+              <li><i class="fa-solid fa-check"></i> Communication tower design and detailing</li>
+              <li><i class="fa-solid fa-check"></i> Industrial facility design</li>
+              <li><i class="fa-solid fa-check"></i> Infrastructure BIM modeling</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US SECTION -->
+  <section class="why-choose-us-section" id="why-choose-us">
+    <div class="container">
+      <h2 data-aos="fade-up" class="section-title">Why Choose ASISA?</h2>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+        Excellence in engineering, delivered with precision and commitment
+      </p>
+
+      <div class="why-choose-grid">
+        <div class="why-choose-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="why-choose-icon">
+            <i class="fa-solid fa-award"></i>
+          </div>
+          <h3>Proven Expertise</h3>
+          <p>
+            With 500+ experienced engineers and a track record of 500+ successful global projects, 
+            we bring unmatched expertise to every engagement.
+          </p>
+        </div>
+
+        <div class="why-choose-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="why-choose-icon">
+            <i class="fa-solid fa-clock"></i>
+          </div>
+          <h3>Timely Delivery</h3>
+          <p>
+            We understand the importance of deadlines. Our streamlined processes ensure on-time 
+            delivery without compromising quality.
+          </p>
+        </div>
+
+        <div class="why-choose-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="why-choose-icon">
+            <i class="fa-solid fa-dollar-sign"></i>
+          </div>
+          <h3>Cost-Effective Solutions</h3>
+          <p>
+            Our offshore delivery model provides significant cost savings while maintaining 
+            international quality standards.
+          </p>
+        </div>
+
+        <div class="why-choose-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="why-choose-icon">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <h3>Quality Assurance</h3>
+          <p>
+            Rigorous quality control processes ensure all deliverables meet or exceed 
+            international standards and client expectations.
+          </p>
+        </div>
+
+        <div class="why-choose-card" data-aos="fade-up" data-aos-delay="500">
+          <div class="why-choose-icon">
+            <i class="fa-solid fa-headset"></i>
+          </div>
+          <h3>24/7 Support</h3>
+          <p>
+            Our dedicated support team is available around the clock to address your queries 
+            and ensure seamless project execution.
+          </p>
+        </div>
+
+        <div class="why-choose-card" data-aos="fade-up" data-aos-delay="600">
+          <div class="why-choose-icon">
+            <i class="fa-solid fa-globe"></i>
+          </div>
+          <h3>Global Reach</h3>
+          <p>
+            Serving clients across 2+ countries with a deep understanding of local codes, 
+            standards, and construction practices.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR PROCESS SECTION -->
+  <section class="our-process-section" id="our-process">
+    <div class="container">
+      <h2 data-aos="fade-up" class="section-title">Our Process</h2>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+        A systematic approach to delivering exceptional results
+      </p>
+
+      <div class="process-timeline">
+        <div class="process-step" data-aos="fade-right" data-aos-delay="100">
+          <div class="process-number">01</div>
+          <div class="process-content">
+            <h3>Project Initiation</h3>
+            <p>
+              We begin by understanding your requirements, project scope, and objectives. 
+              Our team conducts detailed discussions to ensure alignment with your vision.
+            </p>
+          </div>
+        </div>
+
+        <div class="process-step" data-aos="fade-left" data-aos-delay="200">
+          <div class="process-number">02</div>
+          <div class="process-content">
+            <h3>Planning & Design</h3>
+            <p>
+              Our experts develop comprehensive project plans, create initial designs, 
+              and establish quality benchmarks and delivery milestones.
+            </p>
+          </div>
+        </div>
+
+        <div class="process-step" data-aos="fade-right" data-aos-delay="300">
+          <div class="process-number">03</div>
+          <div class="process-content">
+            <h3>Execution & Development</h3>
+            <p>
+              With meticulous attention to detail, we execute the project using advanced 
+              software tools and industry best practices, ensuring precision at every step.
+            </p>
+          </div>
+        </div>
+
+        <div class="process-step" data-aos="fade-left" data-aos-delay="400">
+          <div class="process-number">04</div>
+          <div class="process-content">
+            <h3>Quality Review</h3>
+            <p>
+              Every deliverable undergoes rigorous quality checks and code compliance 
+              verification before being submitted to ensure accuracy and completeness.
+            </p>
+          </div>
+        </div>
+
+        <div class="process-step" data-aos="fade-right" data-aos-delay="500">
+          <div class="process-number">05</div>
+          <div class="process-content">
+            <h3>Delivery & Support</h3>
+            <p>
+              We deliver final outputs in your preferred format and provide ongoing support 
+              for revisions, clarifications, and project modifications.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 <!-- WORK PLATFORMS SECTION -->
-<div id="softwares-carousal-include"></div>
-<section <div id="footer-include"></div>
+<section class="work-platforms" id="work-platforms">
+  <h3 data-aos="fade-up">Software Proficiency​</h3>
+  <p data-aos="fade-up" data-aos-delay="100">
+    We use a wide range of civil and structural software for analysis, design, detailing,
+    drafting and estimation of steel and infrastructure projects.
+  </p>
+
+  <div id="platformsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3500">
+    <div class="carousel-inner">
+
+      <!-- SLIDE 1 (10 softwares) -->
+      <div class="carousel-item active">
+        <div class="software-grid">
+          <!-- replace src paths with your real logo images -->
+          <div class="software-card">
+            <img src="assets/img/software/autodesk-civil3d.png" alt="Autodesk Civil 3D">
+          </div>
+          <div class="software-card">
+            <img src="assets/img/software/autodesk-navisworks.png" alt="Autodesk Navisworks">
+          </div>
+          <div class="software-card">
+            <img src="assets/img/software/autocad-plant3d.png" alt="AutoCAD Plant 3D">
+          </div>
+          <div class="software-card">
+            <img src="assets/img/software/ansys.png" alt="ANSYS">
+          </div>
+          <div class="software-card">
+            <img src="assets/img/software/staad-pro.png" alt="STAAD Pro V8i">
+          </div>
+          <div class="software-card">
+            <img src="assets/img/software/infraworks.png" alt="InfraWorks">
+          </div>
+          <div class="software-card">
+            <img src="assets/img/software/autodesk-bim360.png" alt="Autodesk BIM 360">
+          </div>
+          <div class="software-card">
+            <img src="assets/img/software/dynamo.png" alt="Dynamo">
+          </div>
+          <div class="software-card">
+            <img src="assets/img/software/autodesk-civil3d.png" alt="Civil 3D">
+          </div>
+          <div class="software-card">
+            <img src="assets/img/software/revit.png" alt="Revit">
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2 (next 10 softwares – example names, change as needed) -->
+      <div class="carousel-item">
+        <div class="software-grid">
+          <div class="software-card">
+            <img src="assets/img/software/tekla-structures.png" alt="Tekla Structures">
+          </div>
+          <div class="software-card">
+            <img src="assets/img/software/sds2.png" alt="SDS/2">
+          </div>
+          <div class="software-card">
+            <img src="assets/img/software/advance-steel.png" alt="Advance Steel">
+          </div>
+          <div class="software-card">
+            <img src="assets/img/software/rebarcad.png" alt="RebarCAD">
+          </div>
+          <div class="software-card">
+            <img src="assets/img/software/revit.png" alt="Revit">
+          </div>
+          <div class="software-card">
+            <img src="assets/img/software/autocad.png" alt="AutoCAD">
+          </div>
+          <div class="software-card">
+            <img src="assets/img/software/etabs.png" alt="ETABS">
+          </div>
+          <div class="software-card">
+            <img src="assets/img/software/staad-pro.png" alt="STAAD.Pro CONNECT">
+          </div>
+          <div class="software-card">
+            <img src="assets/img/software/plan-swift.png" alt="PlanSwift">
+          </div>
+          <div class="software-card">
+            <img src="assets/img/software/bluebeam.png" alt="Bluebeam Revu">
+          </div>
+        </div>
+      </div>
+
+      <!-- You can add more slides similarly if you have >20 tools -->
+    </div>
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#platformsCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#platformsCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
+
+    <!-- Dots -->
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#platformsCarousel" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#platformsCarousel" data-bs-slide-to="1"></button>
+    </div>
+  </div>
 </section>
-   <!-- JS for softwares-carousal -->
-<script src="assets/js/softwares-carousal.js"></script>
+
+<section>
+  <div id="footer-include"></div>
+</section>
  <!-- JS for footer -->
 <script src="assets/js/footer.js"></script>
  <!-- JS for navigation on mobile-->
     <script src="assets/js/nav.js"></script>
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Initialize AOS -->
+  <script>
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      offset: 100
+    });
+  </script>
 </body>
 </html>
